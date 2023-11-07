@@ -5,6 +5,7 @@ spring:
   application:
     name: API-GATEWAY
 
+
 cloud:
   gateway:
     routes:
@@ -25,4 +26,30 @@ eureka:
     register-with-eureka: true
     service-url:
       default-zone: http://localhost:8761/eureka
+
+      management: // it just for monitoring of health //
+      health:
+      circuitbreakers:
+        enable:true
+      endpoints:
+      web:
+        exposure:
+          include:health
+
+        endpoint:
+          health:
+            show-details:always
+        resilience4j:
+          circuitbreaker:
+          instance:
+          commentBreaker:
+          registerHealthIndicator: true
+          eventConsumerBufferSize: 10
+          failureRateThreshold: 50
+          minimumNumberOfCalls: 5
+          automaticTransitionFromOpenToHalfOpenEnabled: true
+          waitDurationInOpenState: 6s
+          permittedNumberOfCallsInHalfOpenState: 3
+          slidingWindowSize: 10
+          slidingWindowType: COUNT_BASED
 

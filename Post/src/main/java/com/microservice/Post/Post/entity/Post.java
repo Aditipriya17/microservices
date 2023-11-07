@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "posts")
 public class Post {
     @Id
-    private String id;
+    private String postid;
     private String title;
     private String description;
     private String content;

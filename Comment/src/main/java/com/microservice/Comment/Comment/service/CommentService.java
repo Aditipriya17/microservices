@@ -23,7 +23,7 @@ public class CommentService {
 
     // Microservice implementation interacting with one  via url//
     public Comment saveComment(Comment comment) {
-        Post post = restTemplate.getRestTemplate().getForObject("http://localhost:8083/api/posts/" + comment.getPostId(), Post.class);
+        Post post = restTemplate.getRestTemplate().getForObject("http://localhost:8092/api/posts/" + comment.getPostId(), Post.class);
         if (post != null) {
             String commentId = UUID.randomUUID().toString();
             comment.setCommentId(commentId);
